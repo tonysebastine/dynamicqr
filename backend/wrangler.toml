@@ -1,0 +1,15 @@
+name = "my-qr-code-worker"
+type = "javascript"
+
+[env.production]
+kv_namespaces = [
+  { binding = "QR_KV", id = "YOUR_KV_NAMESPACE_ID" }
+]
+
+[[routes]]
+pattern = "https://yourdomain.com/generate"
+script = "my-qr-code-worker"
+
+[[routes]]
+pattern = "https://yourdomain.com/qr/*"
+script = "my-qr-code-worker"

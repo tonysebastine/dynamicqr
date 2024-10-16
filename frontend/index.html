@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic QR Code Generator</title>
+</head>
+<body>
+    <h1>Generate QR Code</h1>
+    <form id="qr-form">
+        <input type="text" id="url" placeholder="Enter URL" required>
+        <button type="submit">Generate</button>
+    </form>
+    <div id="qr-result"></div>
+
+    <script>
+        const form = document.getElementById('qr-form');
+        const qrResult = document.getElementById('qr-result');
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const url = document.getElementById('url').value;
+            const response = await fetch(`/generate?url=${encodeURIComponent(url)}`);
+            const result = await response.text();
+            qrResult.innerHTML = result;
+        });
+    </script>
+</body>
+</html>
